@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{76E2EFB8-0205-4FC3-923C-646F7631D5CD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Klijent</RootNamespace>
+    <AssemblyName>Klijent</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DetaljiTakmicara.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetaljiTakmicara.Designer.cs">
+      <DependentUpon>DetaljiTakmicara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DetaljiTakmicenja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetaljiTakmicenja.Designer.cs">
+      <DependentUpon>DetaljiTakmicenja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DodajObrisiTakmicare.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DodajObrisiTakmicare.Designer.cs">
+      <DependentUpon>DodajObrisiTakmicare.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlavnaForma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GlavnaForma.Designer.cs">
+      <DependentUpon>GlavnaForma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PregledTakmicara.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PregledTakmicara.Designer.cs">
+      <DependentUpon>PregledTakmicara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PretragaTakmicenja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PretragaTakmicenja.Designer.cs">
+      <DependentUpon>PretragaTakmicenja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnosRezultata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnosRezultata.Designer.cs">
+      <DependentUpon>UnosRezultata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnosTakmicara.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnosTakmicara.Designer.cs">
+      <DependentUpon>UnosTakmicara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnosTakmicenja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnosTakmicenja.Designer.cs">
+      <DependentUpon>UnosTakmicenja.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="DetaljiTakmicara.resx">
+      <DependentUpon>DetaljiTakmicara.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetaljiTakmicenja.resx">
+      <DependentUpon>DetaljiTakmicenja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DodajObrisiTakmicare.resx">
+      <DependentUpon>DodajObrisiTakmicare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlavnaForma.resx">
+      <DependentUpon>GlavnaForma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PregledTakmicara.resx">
+      <DependentUpon>PregledTakmicara.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PretragaTakmicenja.resx">
+      <DependentUpon>PretragaTakmicenja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UnosRezultata.resx">
+      <DependentUpon>UnosRezultata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnosTakmicara.resx">
+      <DependentUpon>UnosTakmicara.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnosTakmicenja.resx">
+      <DependentUpon>UnosTakmicenja.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Biblioteka\Biblioteka.csproj">
+      <Project>{275318AD-A3F8-40C1-90BE-57C77141D698}</Project>
+      <Name>Biblioteka</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KontrolerKorisnickogInterfejsa\KontrolerKorisnickogInterfejsa.csproj">
+      <Project>{7E280D94-955E-45C9-855D-4C10B88CE771}</Project>
+      <Name>KontrolerKorisnickogInterfejsa</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
