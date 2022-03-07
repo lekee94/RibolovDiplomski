@@ -4,10 +4,10 @@ namespace SistemskeOperacije.TakmicenjeSO
 {
     public class IzmeniTakmicenje : OpstaSO
     {
-        public override object Izvrsi(IOpstiDomenskiObjekat odo)
+        protected override object Izvrsi(IOpstiDomenskiObjekat odo)
         {
-            Takmicenje t = odo as Takmicenje;
-            foreach (SpisakTakmicara sp in t.ListaTakmicara)
+            var t = odo as Takmicenje;
+            foreach (var sp in t.ListaTakmicara)
             {
                 switch (sp.Status)
                 {

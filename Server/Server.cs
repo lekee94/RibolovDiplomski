@@ -9,7 +9,7 @@ namespace Server
 {
     public class Server
     {
-        public static List<Delegat> listaUlogovanihDelegata = new List<Delegat>();
+        public static readonly List<Delegat> listaUlogovanihDelegata = new List<Delegat>();
         Socket soket;
 
         public bool PokreniServer() 
@@ -21,7 +21,7 @@ namespace Server
                 soket.Bind(ep);
 
                 ThreadStart ts = Osluskuj;
-                Thread nit = new Thread(ts);
+                var nit = new Thread(ts);
                 nit.Start();
 
                 return true;
@@ -32,15 +32,15 @@ namespace Server
             }
         }
 
-        public void Osluskuj() 
+        private void Osluskuj() 
         {
             try
             {
                 soket.Listen(6);
                 while (true) 
                 {
-                    Socket klijent = soket.Accept();
-                    NetworkStream tok = new NetworkStream(klijent);
+                    var klijent = soket.Accept();
+                    var tok = new NetworkStream(klijent);
                     new Obrada(tok);
                 }
             }

@@ -28,6 +28,6 @@ namespace SistemskeOperacije
             return rezultat;
         }
 
-        public abstract object Izvrsi(IOpstiDomenskiObjekat odo);
+        protected abstract object Izvrsi(IOpstiDomenskiObjekat odo);
     }
 }

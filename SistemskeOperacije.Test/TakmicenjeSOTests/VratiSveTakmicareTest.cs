@@ -15,7 +15,7 @@ namespace SistemskeOperacije.Test.TakmicenjeSOTests
 
             var takmicari = new VratiSveTakmicare().IzvrsiSO(new Takmicar()) as List<Takmicar>;
 
-            Assert.IsTrue(takmicari.Count >= ocekivaniRezultat);
+            Assert.IsTrue(takmicari != null && takmicari.Count >= ocekivaniRezultat);
         }
     }
 }

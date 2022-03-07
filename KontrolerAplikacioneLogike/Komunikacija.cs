@@ -29,7 +29,7 @@ namespace Komunikacija
 
         public void Kraj() 
         {
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.Kraj
             };
@@ -38,7 +38,7 @@ namespace Komunikacija
 
         public object PronadjiDelegata(Delegat d)
         {
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.PronadjiDelegata,
                 TransferObjekat = d
@@ -52,7 +52,7 @@ namespace Komunikacija
         public object ZapamtiTakmicara(Takmicar t)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.ZapamtiTakmicara,
                 TransferObjekat = t
@@ -66,7 +66,7 @@ namespace Komunikacija
         public object IzmeniTakmicara(Takmicar t)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.IzmeniTakmicara,
                 TransferObjekat = t
@@ -80,7 +80,7 @@ namespace Komunikacija
         public object ObrisiTakmicara(Takmicar t)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.ObrisiTakmicara,
                 TransferObjekat = t
@@ -94,7 +94,7 @@ namespace Komunikacija
         public object PronadjiTakmicara(Takmicar t)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.PronadjiTakmicara,
                 TransferObjekat = t
@@ -108,7 +108,7 @@ namespace Komunikacija
         public object PretraziTakmicare(Takmicar t)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.PretraziTakmicare,
                 TransferObjekat = t
@@ -122,7 +122,7 @@ namespace Komunikacija
         public object VratiSveZemlje()
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.VratiSveZemlje,
                 TransferObjekat = new Zemlja()
@@ -136,7 +136,7 @@ namespace Komunikacija
         public object VratiSveTakmicare()
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.VratiSveTakmicare,
                 TransferObjekat = new Takmicar()
@@ -150,7 +150,7 @@ namespace Komunikacija
         public object VratiSveStaze()
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.VratiSveStaze,
                 TransferObjekat = new TakmicarskaStaza()
@@ -164,7 +164,7 @@ namespace Komunikacija
         public object ZapamtiTakmicenje(Takmicenje t)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.ZapamtiTakmicenje,
                 TransferObjekat = t
@@ -178,7 +178,7 @@ namespace Komunikacija
         public object IzmeniTakmicenje(Takmicenje t)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.IzmeniTakmicenje,
                 TransferObjekat = t
@@ -192,7 +192,7 @@ namespace Komunikacija
         public object GenerisiIzvestaj(Takmicenje t)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.GenerisiIzvestaj,
                 TransferObjekat = t
@@ -206,7 +206,7 @@ namespace Komunikacija
         public object ObrisiTakmicenje(Takmicenje t)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.ObrisiTakmicenje,
                 TransferObjekat = t
@@ -219,7 +219,7 @@ namespace Komunikacija
         public object ObrisiSpisakTakmicara(SpisakTakmicara sp)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.ObrisiSpisakTakmicara,
                 TransferObjekat = sp
@@ -233,7 +233,7 @@ namespace Komunikacija
         public object PretraziTakmicenja(Takmicenje t)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.PretraziTakmicenja,
                 TransferObjekat = t
@@ -247,7 +247,7 @@ namespace Komunikacija
         public object PronadjiTakmicenje(Takmicenje t)
         {
 
-            TransferKlasa transfer = new TransferKlasa
+            var transfer = new TransferKlasa
             {
                 Operacija = Operacije.PronadjiTakmicenje,
                 TransferObjekat = t

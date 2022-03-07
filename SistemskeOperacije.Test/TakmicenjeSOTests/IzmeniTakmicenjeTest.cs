@@ -13,7 +13,7 @@ namespace SistemskeOperacije.Test.TakmicenjeSOTests
         {
             var ocekivaniRezultat = 1;
 
-            var testStringSufiks = "TEST";
+            const string testStringSufiks = "TEST";
 
             var takmicenjeZaIzmenu = new VratiJednoTakmicenje().IzvrsiSO(new Takmicenje()) as Takmicenje;
             Assert.IsNotNull(takmicenjeZaIzmenu);
@@ -37,7 +37,7 @@ namespace SistemskeOperacije.Test.TakmicenjeSOTests
         public void IzmeniTakmicenjeKojeNePostojiNeuspesno()
         {
             var ocekivaniRezultat = 0;
-            var testString = "IzmeniTakmicenjeKojeNePostojiNeuspesnoTEST";
+            const string testString = "IzmeniTakmicenjeKojeNePostojiNeuspesnoTEST";
 
             var izmenjenoTakmicenje = new Takmicenje()
             {

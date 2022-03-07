@@ -13,7 +13,7 @@ namespace SistemskeOperacije.Test.TakmicarSOTest
         {
             var takmicarID = new Random().Next(500, 5000);
 
-            var takmicar = new Takmicar()
+            var takmicar = new Takmicar
             {
                 TakmicarID = takmicarID,
                 Ime = "Test Ime",

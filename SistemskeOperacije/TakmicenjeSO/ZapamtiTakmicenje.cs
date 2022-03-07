@@ -4,15 +4,15 @@ namespace SistemskeOperacije.TakmicenjeSO
 {
     public class ZapamtiTakmicenje : OpstaSO
     {
-        public override object Izvrsi(IOpstiDomenskiObjekat odo)
+        protected override object Izvrsi(IOpstiDomenskiObjekat odo)
         {
-            Takmicenje t = odo as Takmicenje;
+            var t = odo as Takmicenje;
 
             t.TakmicenjeID = Sesija.Broker.DajSesiju().DajSifru(odo);
 
             Sesija.Broker.DajSesiju().Sacuvaj(odo); 
 
-            foreach (SpisakTakmicara sp in t.ListaTakmicara)
+            foreach (var sp in t.ListaTakmicara)
             {
                 switch (sp.Status)
                 {

@@ -79,14 +79,12 @@ namespace KontrolerKorisnickogInterfejsa
         public void UnesiUlovZaTakmicara(DataGridView dgvTakmicari, TextBox txtUlov)
         {
             //SpisakTakmicara sp = cmbTakmicariRang.SelectedItem as SpisakTakmicara;
-            SpisakTakmicara sp = dgvTakmicari.CurrentRow.DataBoundItem as SpisakTakmicara;
+            var sp = dgvTakmicari.CurrentRow.DataBoundItem as SpisakTakmicara;
 
             try
             {
                 foreach (var t in takmicenje.ListaTakmicara.Where(t => t.Takmicar.TakmicarID == sp.Takmicar.TakmicarID))
-                {
                     t.Ulov = Convert.ToInt32(txtUlov.Text);
-                }
             }
             catch (Exception)
             {
@@ -105,10 +103,8 @@ namespace KontrolerKorisnickogInterfejsa
             //cmbTakmicari.Text = "Izaberite igrača!";
 
             foreach (var t in takmicenje.ListaTakmicara)
-            {
                 //cmbTakmicari.Items.Add(t);
                 spBindingList.Add(t);
-            }
 
             dgvTakmicari.DataSource = spBindingList;
 
@@ -129,9 +125,7 @@ namespace KontrolerKorisnickogInterfejsa
                                  select t).ToList();
 
             foreach (var takmicarIzBaze in takmicenje.ListaTakmicara.SelectMany(takmicarUTakmicenju => takmicariLoop.Where(takmicarIzBaze => takmicarIzBaze.TakmicarID == takmicarUTakmicenju.Takmicar.TakmicarID)))
-            {
                 takmicari.Remove(takmicarIzBaze);
-            }
 
             //foreach (Takmicar t in takmicari)
             //{
@@ -163,20 +157,18 @@ namespace KontrolerKorisnickogInterfejsa
 
         public void IzracunajRezultate()
         {
-            for (int i = takmicenje.ListaTakmicara.Count - 1; i >= 0; i--)
+            for (var i = takmicenje.ListaTakmicara.Count - 1; i >= 0; i--)
             {
-                for (int j = 0; j < i; j++)
+                for (var j = 0; j < i; j++)
                 {
-                    if (takmicenje.ListaTakmicara[j].Ulov < takmicenje.ListaTakmicara[j + 1].Ulov)
-                    {
-                        SpisakTakmicara pom = takmicenje.ListaTakmicara[j];
-                        takmicenje.ListaTakmicara[j] = takmicenje.ListaTakmicara[j + 1];
-                        takmicenje.ListaTakmicara[j + 1] = pom;
-                    }
+                    if (takmicenje.ListaTakmicara[j].Ulov >= takmicenje.ListaTakmicara[j + 1].Ulov) continue;
+                    var pom = takmicenje.ListaTakmicara[j];
+                    takmicenje.ListaTakmicara[j] = takmicenje.ListaTakmicara[j + 1];
+                    takmicenje.ListaTakmicara[j + 1] = pom;
                 }
             }
 
-            for (int i = 0; i < takmicenje.ListaTakmicara.Count; i++)
+            for (var i = 0; i < takmicenje.ListaTakmicara.Count; i++)
             {
                 if (i == 0) 
                     takmicenje.ListaTakmicara[i].Rang = 1;
@@ -211,7 +203,7 @@ namespace KontrolerKorisnickogInterfejsa
                     komunikacija.ObrisiSpisakTakmicara(sp);
                 }
             }
-            object rez = komunikacija.ObrisiTakmicenje(takmicenje);
+            var rez = komunikacija.ObrisiTakmicenje(takmicenje);
             
 
             if (rez == null)
@@ -232,11 +224,11 @@ namespace KontrolerKorisnickogInterfejsa
             takmicenje = new Takmicenje();
             takmicenje.Uslov = "Naziv like '"+txtFilter.Text+"%' or Kategorija like '"+txtFilter.Text+"%'";
 
-            List<Takmicenje> lista = komunikacija.PretraziTakmicenja(takmicenje) as List<Takmicenje>;
+            var lista = komunikacija.PretraziTakmicenja(takmicenje) as List<Takmicenje>;
             dataGridView1.DataSource = lista;
             if (lista == null)
                 MessageBox.Show("Sistem ne može da pronađe takmičenja!");
-            if (lista.Count == 0)
+            if (lista != null && lista.Count == 0)
                 MessageBox.Show("Sistem ne može da pronađe takmičenja!");
         }
 
@@ -292,7 +284,7 @@ namespace KontrolerKorisnickogInterfejsa
             }
             takmicenje.Kategorija = cmbKategorija.SelectedItem.ToString();
 
-            object rez = komunikacija.GenerisiIzvestaj(takmicenje);
+            var rez = komunikacija.GenerisiIzvestaj(takmicenje);
 
             if (rez == null)
             {
@@ -333,7 +325,7 @@ namespace KontrolerKorisnickogInterfejsa
             }
             takmicenje.Kategorija = cmbKategorija.SelectedItem.ToString();
 
-            object rez = komunikacija.ZapamtiTakmicenje(takmicenje);
+            var rez = komunikacija.ZapamtiTakmicenje(takmicenje);
 
             if (rez == null)
             {
@@ -375,7 +367,7 @@ namespace KontrolerKorisnickogInterfejsa
             }
             takmicenje.Kategorija = cmbKategorija.SelectedItem.ToString();
 
-            object rez = komunikacija.IzmeniTakmicenje(takmicenje);
+            var rez = komunikacija.IzmeniTakmicenje(takmicenje);
 
             if (rez == null)
             {
@@ -394,7 +386,7 @@ namespace KontrolerKorisnickogInterfejsa
         {
             try
             {
-                SpisakTakmicara sp = dataGridView1.CurrentRow.DataBoundItem as SpisakTakmicara;
+                var sp = dataGridView1.CurrentRow.DataBoundItem as SpisakTakmicara;
                 if (sp.Status == Status.Dodat)
                     takmicenje.ListaTakmicara.Remove(sp);
                 
@@ -414,22 +406,25 @@ namespace KontrolerKorisnickogInterfejsa
             {
                 try
                 {
-                    SpisakTakmicara sp = red.DataBoundItem as SpisakTakmicara;
+                    var sp = red.DataBoundItem as SpisakTakmicara;
                     if (sp.Status == Status.Obrisan) 
                         red.DefaultCellStyle.BackColor = Color.Red;
                 }
                 catch (Exception)
                 {
+                    // ignored
                 }
             }
         }
 
         public void DodajTakmicara(DataGridView dgvTakmicari, TextBox txtStartniBroj)
         {
-            SpisakTakmicara sp = new SpisakTakmicara();
-            sp.TakmicenjeID = takmicenje.TakmicenjeID;
-            sp.Status = Status.Dodat;
-            sp.Takmicar = dgvTakmicari.CurrentRow.DataBoundItem as Takmicar;
+            var sp = new SpisakTakmicara
+            {
+                TakmicenjeID = takmicenje.TakmicenjeID,
+                Status = Status.Dodat,
+                Takmicar = dgvTakmicari.CurrentRow.DataBoundItem as Takmicar
+            };
             var selectedRowIndex = dgvTakmicari.CurrentRow.Index;
             if (sp.Takmicar == null)
             {
@@ -449,7 +444,7 @@ namespace KontrolerKorisnickogInterfejsa
                 return;
             }
 
-            foreach (var _ in takmicenje.ListaTakmicara.Where(s => s.RedniBroj == sp.RedniBroj && s.Status != Status.Obrisan).Select(s => new { }))
+            if (takmicenje.ListaTakmicara.Where(s => s.RedniBroj == sp.RedniBroj && s.Status != Status.Obrisan).Select(s => new { }).Any())
             {
                 MessageBox.Show("Redni broj je već dodeljen!");
                 return;
@@ -481,7 +476,7 @@ namespace KontrolerKorisnickogInterfejsa
 
         public bool ObrisiTakmicara()
         {
-            object rez = komunikacija.ObrisiTakmicara(takmicar);
+            var rez = komunikacija.ObrisiTakmicara(takmicar);
 
             if (rez == null)
             {
@@ -497,21 +492,21 @@ namespace KontrolerKorisnickogInterfejsa
 
         public void PretraziTakmicare(TextBox txtFilter, DataGridView dataGridView1)
         {
-            takmicar = new Takmicar();
-            takmicar.Uslov = " Ime like '"+txtFilter.Text+"%' or Prezime like '"+txtFilter.Text+ "%' or Email like '" + txtFilter.Text + "%'";
+            takmicar = new Takmicar
+            {
+                Uslov = " Ime like '"+txtFilter.Text+"%' or Prezime like '"+txtFilter.Text+ "%' or Email like '" + txtFilter.Text + "%'"
+            };
 
-            List<Takmicar> lista = komunikacija.PretraziTakmicare(takmicar) as List<Takmicar>;
+            var lista = komunikacija.PretraziTakmicare(takmicar) as List<Takmicar>;
             dataGridView1.DataSource = lista;
             if (lista == null)
             {
                 MessageBox.Show("Sistem ne može da pronađe takmičare!");
                 return;
             }
-            if (lista.Count == 0)
-            {
-                MessageBox.Show("Ne postoje takmičari za uneti kriterijum!");
-                return;
-            }            
+
+            if (lista.Count != 0) return;
+            MessageBox.Show("Ne postoje takmičari za uneti kriterijum!");
         }
 
         public bool PronadjiTakmicara(DataGridView dataGridView1)
@@ -627,7 +622,7 @@ namespace KontrolerKorisnickogInterfejsa
                 return false;
             }
 
-            foreach (var _ in takmicar.BrojTelefona.Where(c => char.IsLetter(c)).Select(c => new { }))
+            if (takmicar.BrojTelefona.Where(char.IsLetter).Select(c => new { }).Any())
             {
                 MessageBox.Show("Broj telefona ne sme da sadrži slova!");
                 txtBrojTelefona.Focus();
@@ -674,31 +669,27 @@ namespace KontrolerKorisnickogInterfejsa
                 return false;
             }
 
-            foreach (var _ in takmicar.PostanskiBroj.Where(c => !char.IsDigit(c) || c == ' ').Select(c => new { }))
+            if (takmicar.PostanskiBroj.Where(c => !char.IsDigit(c) || c == ' ').Select(c => new { }).Any())
             {
                 MessageBox.Show("Poštanski broj mora da sadrži samo brojeve!");
                 txtPostanskiBroj.Focus();
                 return false;
             }
 
-            object rez = komunikacija.ZapamtiTakmicara(takmicar);
+            var rez = komunikacija.ZapamtiTakmicara(takmicar);
 
             if (rez == null)
             {
                 MessageBox.Show("Sistem ne može da zapamti takmičara!");
                 return false;
             }
-            else
-            {
-                if (takmicariB.Count > 0)
-                //cmbTakmicari.Items.Add(takmicar);
-                {
-                    takmicariB.Add(takmicar);
-                }
 
-                MessageBox.Show("Sistem je zapamtio takmičara!");
-                return true;
-            }
+            if (takmicariB != null && takmicariB.Count > 0)
+                //cmbTakmicari.Items.Add(takmicar);
+                takmicariB.Add(takmicar);
+
+            MessageBox.Show("Sistem je zapamtio takmičara!");
+            return true;
         }
 
         public bool IzmeniTakmicara(TextBox txtIme, TextBox txtPrezime, ComboBox cmbOslovljavanje, TextBox txtJmbg, TextBox txtEmail, DateTimePicker dtpDatum, TextBox txtBrojTelefona, ComboBox cmbZemlja, TextBox txtAdresa, TextBox txtPostanskiBroj)
@@ -711,7 +702,7 @@ namespace KontrolerKorisnickogInterfejsa
                 return false;
             }
 
-            foreach (var _ in takmicar.Ime.Where(c => !char.IsLetter(c) && c != ' ').Select(c => new { }))
+            if (takmicar.Ime.Where(c => !char.IsLetter(c) && c != ' ').Select(c => new { }).Any())
             {
                 MessageBox.Show("Ime mora da sadrži samo slova!");
                 txtIme.Focus();
@@ -727,7 +718,7 @@ namespace KontrolerKorisnickogInterfejsa
                 return false;
             }
 
-            foreach (var _ in takmicar.Prezime.Where(c => !char.IsLetter(c) && c != ' ').Select(c => new { }))
+            if (takmicar.Prezime.Where(c => !char.IsLetter(c) && c != ' ').Select(c => new { }).Any())
             {
                 MessageBox.Show("Prezime mora da sadrži samo slova!");
                 txtPrezime.Focus();
@@ -745,7 +736,7 @@ namespace KontrolerKorisnickogInterfejsa
                 return false;
             }
 
-            foreach (var _ in takmicar.Jmbg.Where(c => !char.IsDigit(c) || c == ' ').Select(c => new { }))
+            if (takmicar.Jmbg.Where(c => !char.IsDigit(c) || c == ' ').Select(c => new { }).Any())
             {
                 MessageBox.Show("JMBG mora da sadrži samo brojeve!");
                 txtJmbg.Focus();
@@ -786,7 +777,7 @@ namespace KontrolerKorisnickogInterfejsa
                 return false;
             }
 
-            foreach (var _ in takmicar.BrojTelefona.Where(c => char.IsLetter(c)).Select(c => new { }))
+            if (takmicar.BrojTelefona.Where(char.IsLetter).Select(c => new { }).Any())
             {
                 MessageBox.Show("Broj telefona ne sme da sadrži slova!");
                 txtBrojTelefona.Focus();
@@ -823,36 +814,33 @@ namespace KontrolerKorisnickogInterfejsa
                 return false;
             }
 
-            foreach (var _ in takmicar.PostanskiBroj.Where(c => !char.IsDigit(c) || c == ' ').Select(c => new { }))
+            if (takmicar.PostanskiBroj.Where(c => !char.IsDigit(c) || c == ' ').Select(c => new { }).Any())
             {
                 MessageBox.Show("Poštanski broj mora da sadrži samo brojeve!");
                 txtPostanskiBroj.Focus();
                 return false;
             }
 
-            object rez = komunikacija.IzmeniTakmicara(takmicar);
+            var rez = komunikacija.IzmeniTakmicara(takmicar);
 
             if (rez == null)
             {
                 MessageBox.Show("Sistem ne može da izmeni takmičara!");
                 return false;
             }
-            else
-            {
-                MessageBox.Show("Sistem je izmenio takmičara!");
-                return true;
-            }
+
+            MessageBox.Show("Sistem je izmenio takmičara!");
+            return true;
         }
 
-        public void Kraj()
-        {
-            komunikacija.Kraj();
-        }
+        public void Kraj() => komunikacija.Kraj();
 
         public bool PronadjiDelegata(TextBox txtUser, TextBox txtPass)
         {
-            delegat = new Delegat();
-            delegat.Uslov = " Username='"+txtUser.Text+"' and Password='"+txtPass.Text+"'";
+            delegat = new Delegat
+            {
+                Uslov = " Username='"+txtUser.Text+"' and Password='"+txtPass.Text+"'"
+            };
 
             delegat = komunikacija.PronadjiDelegata(delegat) as Delegat;
 
@@ -865,20 +853,16 @@ namespace KontrolerKorisnickogInterfejsa
                 return false;
 
             }
-            else
-            {
-                MessageBox.Show("Sistem je uspešno prijavio korisnika!");
-                return true;
-            }
+
+            MessageBox.Show("Sistem je uspešno prijavio korisnika!");
+            return true;
         }
 
-        private bool DaLiJeMailValidan(string email)
+        private static bool DaLiJeMailValidan(string email)
         {
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            Match match = regex.Match(email);
-            if (match.Success)
-                return true;
-            return false;
+            var regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            var match = regex.Match(email);
+            return match.Success;
         }
     }
 }

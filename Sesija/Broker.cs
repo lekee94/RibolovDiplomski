@@ -13,15 +13,9 @@ namespace Sesija
         SqlConnection konekcija;
         SqlTransaction transakcija;
 
-        public static Broker instanca;
+        private static Broker instanca;
 
-        public static Broker DajSesiju() 
-        {
-            if (instanca == null)
-                instanca = new Broker();
-            
-            return instanca;
-        }
+        public static Broker DajSesiju() => instanca ?? (instanca = new Broker());
 
         public void OtvoriKonekciju()
         {
@@ -85,40 +79,15 @@ namespace Sesija
         }
 
 
-        public List<IOpstiDomenskiObjekat> DajSve(IOpstiDomenskiObjekat odo)
+        public IEnumerable<IOpstiDomenskiObjekat> DajSve(IOpstiDomenskiObjekat odo)
         {
-            string upit = "SELECT * FROM " + odo.Tabela;
+            var upit = "SELECT * FROM " + odo.Tabela;
             SqlDataReader citac = null;
-            SqlCommand komanda = new SqlCommand(upit, konekcija, transakcija);
+            var komanda = new SqlCommand(upit, konekcija, transakcija);
             try
             {
                 citac = komanda.ExecuteReader();
-                DataTable tabela = new DataTable();
-                tabela.Load(citac);
-                return (from DataRow red in tabela.Rows
-                        let pom = odo.Napuni(red)
-                        select pom).ToList();
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Greška u radu sa bazom!");
-            }
-            finally
-            {
-                if (citac != null)
-                    citac.Close();
-            }
-        }
-
-        public List<IOpstiDomenskiObjekat> DajSveZaUslovVise(IOpstiDomenskiObjekat odo)
-        {
-            string upit = "SELECT * FROM " + odo.Tabela + " WHERE " + odo.UslovVise;
-            SqlDataReader citac = null;
-            SqlCommand komanda = new SqlCommand(upit, konekcija, transakcija);
-            try
-            {
-                citac = komanda.ExecuteReader();
-                DataTable tabela = new DataTable();
+                var tabela = new DataTable();
                 tabela.Load(citac);
                 return (from DataRow red in tabela.Rows
                         let pom = odo.Napuni(red)
@@ -130,20 +99,43 @@ namespace Sesija
             }
             finally
             {
-                if (citac != null)
-                    citac.Close();
+                citac?.Close();
+            }
+        }
+
+        public IEnumerable<IOpstiDomenskiObjekat> DajSveZaUslovVise(IOpstiDomenskiObjekat odo)
+        {
+            var upit = "SELECT * FROM " + odo.Tabela + " WHERE " + odo.UslovVise;
+            SqlDataReader citac = null;
+            var komanda = new SqlCommand(upit, konekcija, transakcija);
+            try
+            {
+                citac = komanda.ExecuteReader();
+                var tabela = new DataTable();
+                tabela.Load(citac);
+                return (from DataRow red in tabela.Rows
+                        let pom = odo.Napuni(red)
+                        select pom).ToList();
+            }
+            catch (Exception)
+            {
+                throw new Exception("Greška u radu sa bazom!");
+            }
+            finally
+            {
+                citac?.Close();
             }
         }
 
         public IOpstiDomenskiObjekat DajZaUslovJedan(IOpstiDomenskiObjekat odo)
         {
-            string upit = "SELECT * FROM " + odo.Tabela + " WHERE " + odo.UslovJedan;
+            var upit = "SELECT * FROM " + odo.Tabela + " WHERE " + odo.UslovJedan;
             SqlDataReader reader = null;
-            SqlCommand komanda = new SqlCommand(upit, konekcija, transakcija);
+            var komanda = new SqlCommand(upit, konekcija, transakcija);
             try
             {
                 reader = komanda.ExecuteReader();
-                DataTable tabela = new DataTable();
+                var tabela = new DataTable();
                 tabela.Load(reader);
                 DataRow red;
                 if (tabela.Rows.Count == 0)
@@ -159,21 +151,20 @@ namespace Sesija
             }
             finally
             {
-                if (reader != null)
-                    reader.Close();
+                reader?.Close();
             }
         }
 
         public IOpstiDomenskiObjekat DajZaUslovVise(IOpstiDomenskiObjekat odo)
         {
-            string upit = "SELECT * FROM " + odo.Tabela + " WHERE " + odo.UslovVise;
-            ;
+            var upit = "SELECT * FROM " + odo.Tabela + " WHERE " + odo.UslovVise;
+            
             SqlDataReader reader = null;
-            SqlCommand komanda = new SqlCommand(upit, konekcija, transakcija);
+            var komanda = new SqlCommand(upit, konekcija, transakcija);
             try
             {
                 reader = komanda.ExecuteReader();
-                DataTable tabela = new DataTable();
+                var tabela = new DataTable();
                 tabela.Load(reader);
                 DataRow red;
                 if (tabela.Rows.Count == 0)
@@ -189,15 +180,14 @@ namespace Sesija
             }
             finally
             {
-                if (reader != null)
-                    reader.Close();
+                reader?.Close();
             }
         }
 
         public int Izmeni(IOpstiDomenskiObjekat odo)
         {
-            string upit = "UPDATE " + odo.Tabela + " SET " + odo.Azuriranje + " WHERE " + odo.UslovJedan;
-            SqlCommand komanda = new SqlCommand(upit, konekcija, transakcija);
+            var upit = "UPDATE " + odo.Tabela + " SET " + odo.Azuriranje + " WHERE " + odo.UslovJedan;
+            var komanda = new SqlCommand(upit, konekcija, transakcija);
             try
             {
                 return komanda.ExecuteNonQuery();
@@ -210,8 +200,8 @@ namespace Sesija
 
         public int Sacuvaj(IOpstiDomenskiObjekat odo)
         {
-            string upit = "INSERT INTO " + odo.Tabela + " " + odo.Upisivanje;
-            SqlCommand komanda = new SqlCommand(upit, konekcija, transakcija); ;
+            var upit = "INSERT INTO " + odo.Tabela + " " + odo.Upisivanje;
+            var komanda = new SqlCommand(upit, konekcija, transakcija); ;
             try
             {
                 var result =  komanda.ExecuteNonQuery();
@@ -225,7 +215,7 @@ namespace Sesija
 
         public int Obrisi(IOpstiDomenskiObjekat odo)
         {
-            string upit = "DELETE FROM " + odo.Tabela + " WHERE " + odo.UslovJedan;
+            var upit = "DELETE FROM " + odo.Tabela + " WHERE " + odo.UslovJedan;
             IDbCommand komanda = new SqlCommand(upit, konekcija, transakcija);
             try
             {
@@ -239,8 +229,8 @@ namespace Sesija
 
         public int ObrisiZaUslovVise(IOpstiDomenskiObjekat odo)
         {
-            string upit = "DELETE FROM " + odo.Tabela + " WHERE " + odo.UslovVise;
-            SqlCommand komanda = new SqlCommand(upit, konekcija, transakcija);
+            var upit = "DELETE FROM " + odo.Tabela + " WHERE " + odo.UslovVise;
+            var komanda = new SqlCommand(upit, konekcija, transakcija);
             try
             {
                 return komanda.ExecuteNonQuery();
@@ -253,20 +243,13 @@ namespace Sesija
 
         public int DajSifru(IOpstiDomenskiObjekat odo)
         {
-            string upit = "SELECT MAX(" + odo.Kljuc + ") FROM " + odo.Tabela;
-            SqlCommand komanda = new SqlCommand(upit, konekcija, transakcija);
-            try
-            {                
-                var rez = komanda.ExecuteScalar();
+            var upit = "SELECT MAX(" + odo.Kljuc + ") FROM " + odo.Tabela;
+            var komanda = new SqlCommand(upit, konekcija, transakcija);
+            var rez = komanda.ExecuteScalar();
 
-                if (rez == DBNull.Value) 
-                    return 1;
-                return Convert.ToInt32(rez) + 1;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            if (rez == DBNull.Value) 
+                return 1;
+            return Convert.ToInt32(rez) + 1;
         }
            
     }

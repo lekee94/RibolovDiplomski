@@ -13,8 +13,8 @@ namespace SistemskeOperacije.Test.TakmicarSOTest
         {
             var ocekivaniRezultat = 1;
 
-            var testStringSufiks = "TEST";
-            var testBrojSufiks = "000";
+            const string testStringSufiks = "TEST";
+            const string testBrojSufiks = "000";
 
             var takmicarZaIzmenu = new VratiJednogTakmicara().IzvrsiSO(new Takmicar()) as Takmicar;
             Assert.IsNotNull(takmicarZaIzmenu);
@@ -43,8 +43,8 @@ namespace SistemskeOperacije.Test.TakmicarSOTest
         public void IzmeniTakmicaraKojiNePostojiNeuspesno()
         {
             var ocekivaniRezultat = 0;
-            var testString = "IzmeniTakmicaraKojiNePostojiNeuspesnoTEST";
-            var testBroj = "123456789";
+            const string testString = "IzmeniTakmicaraKojiNePostojiNeuspesnoTEST";
+            const string testBroj = "123456789";
 
             var izmenjenTakmicar = new Takmicar()
             {

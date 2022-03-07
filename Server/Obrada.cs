@@ -21,22 +21,22 @@ namespace Server
             formater = new BinaryFormatter();
 
             ThreadStart ts = ObradiKlijenta;
-            Thread nit = new Thread(ts);
+            var nit = new Thread(ts);
             nit.Start();
         }
 
-        public void ObradiKlijenta()
+        private void ObradiKlijenta()
         {
             try
             {
-                int operacija = 0;
+                var operacija = 0;
                 while (operacija != (int)Operacije.Kraj)
                 {
-                    TransferKlasa transfer = formater.Deserialize(tok) as TransferKlasa;
+                    var transfer = formater.Deserialize(tok) as TransferKlasa;
                     switch (transfer.Operacija)
                     {
                         case Operacije.PronadjiDelegata:
-                            PronadjiDelegata pd = new PronadjiDelegata();
+                            var pd = new PronadjiDelegata();
                             transfer.Rezultat = pd.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             d = transfer.Rezultat as Delegat;
@@ -44,90 +44,90 @@ namespace Server
                             break;
 
                         case Operacije.ZapamtiTakmicara:
-                            ZapamtiTakmicara zt = new ZapamtiTakmicara();
+                            var zt = new ZapamtiTakmicara();
                             transfer.Rezultat = zt.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.IzmeniTakmicara:
-                            IzmeniTakmicara it = new IzmeniTakmicara();
+                            var it = new IzmeniTakmicara();
                             transfer.Rezultat = it.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.GenerisiIzvestaj:
-                            GenerisiIzvestaj gi = new GenerisiIzvestaj();
+                            var gi = new GenerisiIzvestaj();
                             transfer.Rezultat = gi.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.ObrisiTakmicara:
-                            ObrisiTakmicara ot = new ObrisiTakmicara();
+                            var ot = new ObrisiTakmicara();
                             transfer.Rezultat = ot.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
                         case Operacije.ObrisiSpisakTakmicara:
-                            ObrisiSpisakTakmicara ost = new ObrisiSpisakTakmicara();
+                            var ost = new ObrisiSpisakTakmicara();
                             transfer.Rezultat = ost.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
                             
                         case Operacije.PretraziTakmicare:
-                            PretraziTakmicare pt = new PretraziTakmicare();
+                            var pt = new PretraziTakmicare();
                             transfer.Rezultat = pt.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.PronadjiTakmicara:
-                            PronadjiTakmicara prot = new PronadjiTakmicara();
+                            var prot = new PronadjiTakmicara();
                             transfer.Rezultat = prot.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.VratiSveZemlje:
-                            VratiSveZemlje vsz = new VratiSveZemlje();
+                            var vsz = new VratiSveZemlje();
                             transfer.Rezultat = vsz.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.VratiSveTakmicare:
-                            VratiSveTakmicare vst = new VratiSveTakmicare();
+                            var vst = new VratiSveTakmicare();
                             transfer.Rezultat = vst.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.VratiSveStaze:
-                            VratiSveStaze vss = new VratiSveStaze();
+                            var vss = new VratiSveStaze();
                             transfer.Rezultat = vss.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.ZapamtiTakmicenje:
-                            ZapamtiTakmicenje ztk = new ZapamtiTakmicenje();
+                            var ztk = new ZapamtiTakmicenje();
                             transfer.Rezultat = ztk.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.IzmeniTakmicenje:
-                            IzmeniTakmicenje itakmicenje = new IzmeniTakmicenje();
+                            var itakmicenje = new IzmeniTakmicenje();
                             transfer.Rezultat = itakmicenje.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.ObrisiTakmicenje:
-                            ObrisiTakmicenje obt = new ObrisiTakmicenje();
+                            var obt = new ObrisiTakmicenje();
                             transfer.Rezultat = obt.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.PretraziTakmicenja:
-                            PretraziTakmicenja ptt = new PretraziTakmicenja();
+                            var ptt = new PretraziTakmicenja();
                             transfer.Rezultat = ptt.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
 
                         case Operacije.PronadjiTakmicenje:
-                            PronadjiTakmicenje prt = new PronadjiTakmicenje();
+                            var prt = new PronadjiTakmicenje();
                             transfer.Rezultat = prt.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
@@ -135,8 +135,6 @@ namespace Server
                         case Operacije.Kraj:
                             operacija = 1;
                             Server.listaUlogovanihDelegata.Remove(d);
-                            break;
-                        default:
                             break;
                     }
                 }

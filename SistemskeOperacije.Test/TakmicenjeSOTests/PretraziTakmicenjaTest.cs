@@ -72,7 +72,7 @@ namespace SistemskeOperacije.Test.TakmicenjeSOTests
 
             var trazenaTakmicenja = new PretraziTakmicenja().IzvrsiSO(takmicenje) as List<Takmicenje>;
 
-            Assert.IsTrue(trazenaTakmicenja.Count <= ocekivaniRezultat);
+            Assert.IsTrue(trazenaTakmicenja != null && trazenaTakmicenja.Count <= ocekivaniRezultat);
         }
     }
 }

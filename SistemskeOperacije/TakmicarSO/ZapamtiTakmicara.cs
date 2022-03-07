@@ -4,9 +4,9 @@ namespace SistemskeOperacije.TakmicarSO
 {
     public class ZapamtiTakmicara : OpstaSO
     {
-        public override object Izvrsi(IOpstiDomenskiObjekat odo)
+        protected override object Izvrsi(IOpstiDomenskiObjekat odo)
         {
-            Takmicar t = odo as Takmicar;
+            var t = odo as Takmicar;
 
             t.TakmicarID = Sesija.Broker.DajSesiju().DajSifru(odo);
 

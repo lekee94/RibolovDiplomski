@@ -15,7 +15,7 @@ namespace SistemskeOperacije.Test.TakmicarSOTest
 
             var zemlje = new VratiSveZemlje().IzvrsiSO(new Zemlja()) as List<Zemlja>;
 
-            Assert.IsTrue(zemlje.Count >= ocekivaniRezultat);
+            Assert.IsTrue(zemlje != null && zemlje.Count >= ocekivaniRezultat);
         }
     }
 }

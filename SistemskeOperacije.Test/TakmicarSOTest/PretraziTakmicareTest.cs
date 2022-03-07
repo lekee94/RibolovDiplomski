@@ -18,7 +18,7 @@ namespace SistemskeOperacije.Test.TakmicarSOTest
 
             var trazeniTakmicari = new PretraziTakmicare().IzvrsiSO(testTakmicar) as List<Takmicar>;
 
-            foreach (Takmicar t in trazeniTakmicari)
+            foreach (var t in trazeniTakmicari)
             {
                 Assert.IsNotNull(t);
 
@@ -36,7 +36,7 @@ namespace SistemskeOperacije.Test.TakmicarSOTest
 
             var trazeniTakmicari = new PretraziTakmicare().IzvrsiSO(testTakmicar) as List<Takmicar>;
 
-            foreach (Takmicar t in trazeniTakmicari)
+            foreach (var t in trazeniTakmicari)
             {
                 Assert.IsNotNull(t);
 
@@ -54,7 +54,7 @@ namespace SistemskeOperacije.Test.TakmicarSOTest
 
             var trazeniTakmicari = new PretraziTakmicare().IzvrsiSO(testTakmicar) as List<Takmicar>;
 
-            foreach (Takmicar t in trazeniTakmicari)
+            foreach (var t in trazeniTakmicari)
             {
                 Assert.IsNotNull(t);
 

@@ -15,7 +15,7 @@ namespace SistemskeOperacije.Test.TakmicenjeSOTests
 
             var staze = new VratiSveStaze().IzvrsiSO(new TakmicarskaStaza()) as List<TakmicarskaStaza>;
 
-            Assert.IsTrue(staze.Count >= ocekivaniRezultat);
+            Assert.IsTrue(staze != null && staze.Count >= ocekivaniRezultat);
         }
     }
 }

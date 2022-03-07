@@ -13,25 +13,25 @@ namespace Izvestaj.Servisi.Implementacija
         {
             try
             {
-                string fileName = $"Takmicenje_{takmicenje.TakmicenjeID}_{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.pdf";
-                var filePath = @"C:\pdfFiles\";
+                var fileName = $"Takmicenje_{takmicenje.TakmicenjeID}_{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.pdf";
+                const string filePath = @"C:\pdfFiles\";
 
                 var fullPath = Path.Combine(filePath, fileName);
 
-                bool folderPostoji = Directory.Exists(filePath);
+                var folderPostoji = Directory.Exists(filePath);
                 if (!folderPostoji)
                     Directory.CreateDirectory(filePath);
 
-                FileStream fs = new FileStream(fullPath, FileMode.Create);
+                var fs = new FileStream(fullPath, FileMode.Create);
 
-                Rectangle rec = new Rectangle(PageSize.A4)
+                var rec = new Rectangle(PageSize.A4)
                 {
                     BackgroundColor = new BaseColor(System.Drawing.Color.AliceBlue)
                 };
 
-                Document document = new Document(rec, 36, 72, 108, 180);
+                var document = new Document(rec, 36, 72, 108, 180);
                 
-                PdfWriter writer = PdfWriter.GetInstance(document, fs);
+                var writer = PdfWriter.GetInstance(document, fs);
                 document.AddAuthor("Aleksa Ristic 2013/0804");
                 document.AddCreator("Deo softverskog sistema za praćenje jednodnevnih takmičenja u ribolovu");
                 document.AddKeywords("softver ribolov");
@@ -66,7 +66,7 @@ namespace Izvestaj.Servisi.Implementacija
                 table.AddCell("Rang");
                 table.AddCell("Ulov");
 
-                foreach (SpisakTakmicara t in takmicenje.ListaTakmicara)
+                foreach (var t in takmicenje.ListaTakmicara)
                 {
                     table.AddCell(t.Takmicar.TakmicarID.ToString());
                     table.AddCell(t.Takmicar.Ime);
