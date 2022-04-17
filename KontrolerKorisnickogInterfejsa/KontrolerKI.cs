@@ -196,15 +196,7 @@ namespace KontrolerKorisnickogInterfejsa
 
         public bool ObrisiTakmicenje()
         {
-            if (takmicenje.ListaTakmicara.Count > 0)
-            {
-                foreach (var sp in takmicenje.ListaTakmicara)
-                {
-                    komunikacija.ObrisiSpisakTakmicara(sp);
-                }
-            }
             var rez = komunikacija.ObrisiTakmicenje(takmicenje);
-            
 
             if (rez == null)
             {
@@ -213,7 +205,6 @@ namespace KontrolerKorisnickogInterfejsa
             }
             else
             {
-                
                 MessageBox.Show("Sistem je obrisao takmičenje!");
                 return true;
             }
@@ -226,10 +217,12 @@ namespace KontrolerKorisnickogInterfejsa
 
             var lista = komunikacija.PretraziTakmicenja(takmicenje) as List<Takmicenje>;
             dataGridView1.DataSource = lista;
+
             if (lista == null)
-                MessageBox.Show("Sistem ne može da pronađe takmičenja!");
+                MessageBox.Show("Sistem ne može da pronađe takmičenja po zadatoj vrednosti");
+
             if (lista != null && lista.Count == 0)
-                MessageBox.Show("Sistem ne može da pronađe takmičenja!");
+                MessageBox.Show("Sistem ne može da pronađe takmičenja po zadatoj vrednosti");
         }
 
         public bool PronadjiTakmicenje(DataGridView dataGridView1)
@@ -238,14 +231,15 @@ namespace KontrolerKorisnickogInterfejsa
             {
                 takmicenje = dataGridView1.CurrentRow.DataBoundItem as Takmicenje;
                 takmicenje = komunikacija.PronadjiTakmicenje(takmicenje) as Takmicenje;
+
                 if (takmicenje == null)
                 {
-                    MessageBox.Show("Sistem ne može da pronađe takmičenje!");
+                    MessageBox.Show("Sistem ne može da učita podatke o izabranom takmičenju");
                     return false;
                 }
                 else
                 {
-                    MessageBox.Show("Sistem je pronašao takmičenje!");
+                    MessageBox.Show("Sistem je uspešno pronašao podatke o izabranom takmičenju");
                     return true;
                 }
             }
@@ -285,10 +279,10 @@ namespace KontrolerKorisnickogInterfejsa
             takmicenje.Kategorija = cmbKategorija.SelectedItem.ToString();
 
             var rez = komunikacija.GenerisiIzvestaj(takmicenje);
-
+            rez = null;
             if (rez == null)
             {
-                MessageBox.Show("Sistem ne može da izgeneriše izveštaj!");
+                MessageBox.Show("Sistem ne može da izgeneriše izveštaj o takmičenju");
                 return false;
             }
             else
@@ -371,12 +365,12 @@ namespace KontrolerKorisnickogInterfejsa
 
             if (rez == null)
             {
-                MessageBox.Show("Sistem ne može da zapamti takmičenje!");
+                MessageBox.Show("Sistem ne može da izmeni takmičenje!");
                 return false;
             }
             else
             {
-                MessageBox.Show("Sistem je zapamtio takmičenje!");
+                MessageBox.Show("Sistem je uspešno izmenio takmičenje!");
                 return true;
             }
 
@@ -455,8 +449,6 @@ namespace KontrolerKorisnickogInterfejsa
             dgvTakmicari.Rows.RemoveAt(selectedRowIndex);
         }
 
-
-
         public void PopuniDetaljeTakmicara(TextBox txtIme, TextBox txtPrezime, ComboBox cmbOslovljavanje, TextBox txtJmbg, TextBox txtEmail, DateTimePicker dtpDatum, TextBox txtBrojTelefona, ComboBox cmbZemlja, TextBox txtAdresa, TextBox txtPostanskiBroj)
         {
             cmbZemlja.DataSource = komunikacija.VratiSveZemlje();
@@ -485,7 +477,7 @@ namespace KontrolerKorisnickogInterfejsa
             }
             else
             {
-                MessageBox.Show("Sistem je obrisao takmičara!");
+                MessageBox.Show("Sistem je uspešno obrisao takmičara!");
                 return true;
             }
         }
@@ -506,7 +498,7 @@ namespace KontrolerKorisnickogInterfejsa
             }
 
             if (lista.Count != 0) return;
-            MessageBox.Show("Ne postoje takmičari za uneti kriterijum!");
+            MessageBox.Show("Sistem ne može da nađe takmičare za uneti kriterijum!");
         }
 
         public bool PronadjiTakmicara(DataGridView dataGridView1)
@@ -519,7 +511,7 @@ namespace KontrolerKorisnickogInterfejsa
 
                 if (takmicar == null)
                 {
-                    MessageBox.Show("Sistem ne može da pronađe takmičara!");
+                    MessageBox.Show("Sistem ne može da učita takmičara!");
                     return false;
                 }
                 else
@@ -684,6 +676,7 @@ namespace KontrolerKorisnickogInterfejsa
                 return false;
             }
 
+            takmicar.TakmicarID = (rez as Takmicar).TakmicarID;
             if (takmicariB != null && takmicariB.Count > 0)
                 //cmbTakmicari.Items.Add(takmicar);
                 takmicariB.Add(takmicar);
@@ -833,8 +826,6 @@ namespace KontrolerKorisnickogInterfejsa
             return true;
         }
 
-        public void Kraj() => komunikacija.Kraj();
-
         public bool PronadjiDelegata(TextBox txtUser, TextBox txtPass)
         {
             delegat = new Delegat
@@ -854,9 +845,11 @@ namespace KontrolerKorisnickogInterfejsa
 
             }
 
-            MessageBox.Show("Sistem je uspešno prijavio korisnika!");
+            MessageBox.Show("Sistem je uspešno prijavio delegata!");
             return true;
         }
+
+        public void Kraj() => komunikacija.Kraj();
 
         private static bool DaLiJeMailValidan(string email)
         {

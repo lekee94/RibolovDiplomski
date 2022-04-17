@@ -216,19 +216,6 @@ namespace Komunikacija
             transfer = formater.Deserialize(tok) as TransferKlasa;
             return transfer.Rezultat;
         }
-        public object ObrisiSpisakTakmicara(SpisakTakmicara sp)
-        {
-
-            var transfer = new TransferKlasa
-            {
-                Operacija = Operacije.ObrisiSpisakTakmicara,
-                TransferObjekat = sp
-            };
-            formater.Serialize(tok, transfer);
-
-            transfer = formater.Deserialize(tok) as TransferKlasa;
-            return transfer.Rezultat;
-        }
 
         public object PretraziTakmicenja(Takmicenje t)
         {

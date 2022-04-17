@@ -21,8 +21,7 @@ namespace Biblioteka
         PronadjiTakmicenje = 15,
         GenerisiIzvestaj = 16,
         DajIDTakmicara = 17,
-        DajIDTakmicenja = 18,
-        ObrisiSpisakTakmicara = 19
+        DajIDTakmicenja = 18
     }
 
     [Serializable]

@@ -154,7 +154,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(580, 77);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Zapamti trku";
+            this.button2.Text = "Zapamti takmičenje";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

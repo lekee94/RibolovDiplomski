@@ -13,7 +13,7 @@ namespace Izvestaj.Servisi.Implementacija
         {
             try
             {
-                var fileName = $"Takmicenje_{takmicenje.TakmicenjeID}_{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.pdf";
+                var fileName = $"Takmicenje_{takmicenje.TakmicenjeID}_{DateTime.Now:dd-mm-yyyy-hh-mm-ss}.pdf";
                 const string filePath = @"C:\pdfFiles\";
 
                 var fullPath = Path.Combine(filePath, fileName);

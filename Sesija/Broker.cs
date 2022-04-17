@@ -60,7 +60,7 @@ namespace Sesija
             {
                 transakcija.Rollback();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 MessageBox.Show("Neuspešno poništavanje!");
             }
@@ -72,7 +72,7 @@ namespace Sesija
             {
                 transakcija.Commit();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 MessageBox.Show("Neuspešna potvrda transakcije!");
             }
@@ -93,7 +93,7 @@ namespace Sesija
                         let pom = odo.Napuni(red)
                         select pom).ToList();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new Exception("Greška u radu sa bazom!");
             }
@@ -117,7 +117,7 @@ namespace Sesija
                         let pom = odo.Napuni(red)
                         select pom).ToList();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new Exception("Greška u radu sa bazom!");
             }
@@ -145,7 +145,7 @@ namespace Sesija
 
                 return odo.Napuni(red);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new Exception("Greška u radu sa bazom!");
             }
@@ -174,7 +174,7 @@ namespace Sesija
 
                 return odo.Napuni(red);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new Exception("Greška u radu sa bazom!");
             }
@@ -192,7 +192,7 @@ namespace Sesija
             {
                 return komanda.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new Exception("Greška u radu sa bazom!");
             }
@@ -207,7 +207,7 @@ namespace Sesija
                 var result =  komanda.ExecuteNonQuery();
                 return result;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new Exception("Greška u radu sa bazom!");
             }
@@ -221,7 +221,7 @@ namespace Sesija
             {
                 return komanda.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new Exception("Greška u radu sa bazom!");
             }
@@ -235,7 +235,7 @@ namespace Sesija
             {
                 return komanda.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new Exception("Greška u radu sa bazom!");
             }

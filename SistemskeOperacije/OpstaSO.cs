@@ -16,7 +16,7 @@ namespace SistemskeOperacije
                 rezultat = Izvrsi(odo);
                 Broker.DajSesiju().PotvrdiTransakciju();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 Broker.DajSesiju().PonistiTransakciju();
             }

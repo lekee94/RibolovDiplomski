@@ -66,11 +66,6 @@ namespace Server
                             transfer.Rezultat = ot.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
                             formater.Serialize(tok, transfer);
                             break;
-                        case Operacije.ObrisiSpisakTakmicara:
-                            var ost = new ObrisiSpisakTakmicara();
-                            transfer.Rezultat = ost.IzvrsiSO(transfer.TransferObjekat as IOpstiDomenskiObjekat);
-                            formater.Serialize(tok, transfer);
-                            break;
                             
                         case Operacije.PretraziTakmicare:
                             var pt = new PretraziTakmicare();
